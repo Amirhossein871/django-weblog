@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8"/>
+    <title>صفحه اصلی | FlyBlog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    {% include 'includes/css_link.html' %}
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+{% include 'includes/header.html' %}
+<main class="page-wrap">
+    {% block main %}
+    {% endblock %}
+</main>
+{% include 'includes/footer.html' %}
+</body>
+{% include 'includes/js_link.html' %}
+{% block foot %}
+{% endblock %}
+</html>

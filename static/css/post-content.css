@@ -1,0 +1,459 @@
+/*
+post-content 281;
+*/
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.post-detail-card,
+.comment-card {
+    background: linear-gradient(180deg, #fff 82%, #fbfeff 100%);
+    border-radius: 1.2rem;
+    box-shadow: 0 12px 40px -10px rgba(33, 154, 228, 0.13);
+    border-left: 7px solid var(--primary, #219ae4);
+    max-width: 1100px;
+    width: 100%;
+    margin: 2.5rem auto 2.5rem auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.post-main-img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    background: #eaf6ff;
+    border-radius: 1.2rem 1.2rem 0 0;
+}
+
+.post-detail-body {
+    padding: 2.2rem 2.8rem 2rem 2.8rem;
+    position: relative;
+}
+
+.post-title-detail {
+    font-weight: 900;
+    font-size: 2.22rem;
+    color: #154766;
+    text-align: center;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.post-info-row {
+    display: flex;
+    gap: 1.55rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: #6a8fb0;
+    font-size: 1.08rem;
+    margin-bottom: 1.3rem;
+}
+
+.post-action-cat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* دسته‌بندی با باکس مستطیلی و شیک */
+.category-list.boxed {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.cat-box {
+    display: inline-block;
+    background: #eaf6ff;
+    color: #219ae4;
+    border-radius: 0.6rem;
+    padding: 0.28em 1.15em;
+    font-size: 0.95em;
+    font-weight: 700;
+    box-shadow: 0 2px 12px -7px rgba(33, 154, 228, 0.08);
+    border: 1px solid #c8e9fd;
+    margin: 0 2px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    min-width: 85px;
+    transition: background .15s, color .16s;
+}
+
+.cat-box:hover {
+    background: #219ae4;
+    color: #fff;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: #219ae4;
+    padding: 0.25rem 0.8rem;
+    border-radius: 0.7rem;
+    transition: background .15s;
+}
+
+.action-btn:hover {
+    background: #eaf6ff;
+    color: #154766;
+}
+
+/* کامنت */
+.comment-card {
+    flex-direction: row;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto 1.3rem auto;
+    align-items: flex-start;
+    background: linear-gradient(180deg, #fff, #fbfeff);
+    padding: 1.3rem 2rem;
+    border-radius: 1.2rem;
+    border-left: 7px solid #219ae4;
+    box-shadow: 0 4px 16px -8px rgba(33, 154, 228, 0.15);
+    transition: transform .12s, box-shadow .12s;
+}
+
+.comment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -12px rgba(33, 154, 228, 0.19);
+}
+
+.comment-avatar {
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+    background: #eaf6ff;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #219ae4;
+    margin-left: 1rem;
+}
+
+.comment-body {
+    flex: 1;
+}
+
+.comment-meta {
+    font-size: 1.07rem;
+    color: #6a8fb0;
+    margin-bottom: 0.18rem;
+    font-weight: 700;
+}
+
+.comment-text {
+    color: #154766;
+    font-size: 1.10rem;
+    margin-bottom: 8px;
+    line-height: 1.85;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.7rem;
+}
+
+.comment-action-btn {
+    background: none;
+    border: none;
+    color: #219ae4;
+    font-size: 1.39rem;
+    padding: 0.22rem 0.7rem;
+    border-radius: 0.5rem;
+    transition: background .15s, color .13s;
+}
+
+.comment-action-btn:hover {
+    background: #eaf6ff;
+    color: #154766;
+}
+
+/* فرم ثبت دیدگاه وسط چین و حرفه‌ای هر فیلد ردیف جدا */
+.comment-form-modern {
+    max-width: 1100px;
+    width: 100%;
+    margin: 2.2rem auto 2rem auto;
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 24px -8px #219ae410;
+    padding: 2.4rem 2rem 2.1rem 2rem;
+    border-left: 7px solid #219ae4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-form-modern h5 {
+    color: #219ae4;
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+    font-size: 1.23rem;
+    text-align: center;
+}
+
+.comment-form-fields.vertical {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+}
+
+.comment-form-modern .form-control {
+    font-size: 1rem;
+    padding: 0.64rem 1rem;
+    border-radius: 0.7rem;
+    border: 1px solid #eaf6ff;
+}
+
+.comment-form-btn-row {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.comment-form-btn-row .btn {
+    min-width: 142px;
+    font-weight: 800;
+    font-size: 1.09rem;
+    border-radius: 0.8rem;
+    padding: 0.6rem 0;
+}
+
+@media (max-width:1200px) {
+
+    .post-detail-card,
+    .comment-card,
+    .comment-form-modern {
+        max-width: 98vw;
+    }
+}
+
+@media (max-width:600px) {
+    .post-detail-body {
+        padding: 1.05rem 0.2rem 0.6rem 0.2rem;
+    }
+
+    .post-main-img {
+        height: 150px;
+    }
+
+    .post-title-detail {
+        font-size: 1.13rem;
+    }
+
+    .comment-avatar {
+        width: 37px;
+        height: 37px;
+    }
+
+    .comment-card,
+    .comment-form-modern {
+        padding: 1.2rem 0.6rem;
+    }
+
+    .cat-box {
+        min-width: 65px;
+        font-size: 0.90em;
+        padding: 0.19em 0.8em;
+    }
+
+    .comment-form-btn-row .btn {
+        font-size: 1em;
+    }
+}
+
+/* ----------------------------------------------------------------- post-content  */
+
+.post-content {
+    font-size: 1rem;
+    line-height: 2.05;
+    border-top: 1px solid #eaf6ff;
+    padding-top: 1.6rem;
+    margin-bottom: 1.1rem;
+    color: #21476a;
+}
+
+/* تیترها */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5 {
+    font-family: inherit;
+    font-weight: 900;
+    margin-top: 2.2em;
+    margin-bottom: 1em;
+    line-height: 1.22;
+    text-align: right;
+}
+
+.post-content h1 {
+    font-size: 2.06em;
+}
+
+.post-content h2 {
+    font-size: 1.7em;
+}
+
+.post-content h3 {
+    font-size: 1.35em;
+}
+
+.post-content h4 {
+    font-size: 1.18em;
+}
+
+.post-content h5 {
+    font-size: 1em;
+}
+
+
+/* پاراگراف */
+.post-content p {
+    margin-bottom: 1em;
+}
+
+/* لیست‌های بدون شماره و شماره‌دار */
+.post-content ul,
+.post-content ol {
+    margin-bottom: 1.2em;
+    margin-right: 2.3em;
+    padding-right: 1.3em;
+}
+
+.post-content ul {
+    list-style: disc outside;
+}
+
+.post-content ol {
+    list-style: decimal outside;
+}
+
+.post-content ul ul,
+.post-content ol ol {
+    margin-bottom: 0.7em;
+    margin-right: 1.2em;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+/* بلاک‌کوت */
+.post-content blockquote {
+    background: #eaf6ff;
+    border-right: 5px solid #219ae4;
+    border-radius: 0.7rem;
+    padding: 1.1em 1.2em;
+    margin: 1.6em 0;
+    color: #154766;
+    font-size: 1rem;
+    font-family: inherit;
+    font-style: italic;
+}
+
+.post-content blockquote p {
+    margin-bottom: 0;
+}
+
+/* عکس داخل محتوا */
+.post-content img {
+    display: block;
+    max-width: 79%;
+    height: auto;
+    border-radius: 1.05rem;
+    margin: 2.1em auto 2.1em auto;
+    box-shadow: 0 6px 24px -7px #219ae420;
+}
+
+@media (max-width: 700px) {
+    .post-content img {
+        max-width: 100%;
+        margin: 1.4em auto 1.4em auto;
+        border-radius: 0.6rem;
+    }
+
+    .post-content h1 {
+        font-size: 1.35em;
+    }
+
+    .post-content h2 {
+        font-size: 1.2em;
+    }
+
+    .post-content h3 {
+        font-size: 1.05em;
+    }
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    background: #f6fbff;
+    border-radius: 0.7em;
+    overflow: hidden;
+    font-size: 1.05em;
+}
+
+.post-content th,
+.post-content td {
+    border: 1px solid #eaf6ff;
+    padding: 0.35em 1em;
+    text-align: right;
+}
+
+.post-content th {
+    background: #219ae4;
+    color: #fff;
+}
+
+.post-content pre,
+.post-content code {
+    font-family: 'FiraMono', monospace;
+    background: #f4f7fa;
+    padding: 0.7em 1em;
+    border-radius: 0.6em;
+    font-size: 1.09em;
+    color: #23445e;
+    direction: ltr;
+    text-align: left;
+}
+
+.post-content pre {
+    margin: 2em 0;
+    overflow-x: auto;
+}
+
+.post-content code {
+    display: inline-block;
+    margin: 0 0.15em;
+}
+
+/* لینک‌ها */
+.post-content a {
+    color: #219ae4;
+    text-decoration: underline;
+    transition: color .13s;
+}
+
+.post-content a:hover {
+    color: #154766;
+    text-decoration: underline;
+}

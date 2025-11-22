@@ -1,0 +1,29 @@
+{% load static %}
+<header class="site-header">
+    <div class="logo-area">
+        <img src="{% static 'img/logo.png' %}" alt="FlyBlog Logo" class="site-logo">
+        <span class="brand-title">FlyBlog</span>
+    </div>
+    <nav class="site-nav" aria-label="منوی ناوبری">
+        <a href="/">خانه</a>
+        <a href="#">درباره ما</a>
+        <a href="#">تماس با ما</a>
+    </nav>
+    <div class="action-bar">
+        <!-- مهمان -->
+        <button class="btn btn-outline-primary login-btn">ورود</button>
+        <button class="btn btn-outline-secondary register-btn">ثبت‌نام</button>
+        <!-- لاگین شد -->
+        <button class="btn btn-primary add-post-btn">پست جدید</button>
+        <div class="user-menu" tabindex="0">
+            <img src="{% static 'img/logo.png' %}" alt="User" class="user-avatar">
+            <span class="user-name">نام کاربر</span>
+            <span>▼</span>
+            <div class="dropdown-menu">
+                <a href="#">داشبورد</a>
+                <hr class="dropdown-divider">
+                <a href="#">خروج</a>
+            </div>
+        </div>
+    </div>
+</header>

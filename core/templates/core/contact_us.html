@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="center-col">
+        <section class="contact-card">
+            <h2 class="contact-title"><i class="bi bi-envelope"></i> تماس با تیم FlyBlog</h2>
+            <p class="contact-desc">
+                هر سوال، پیشنهاد یا انتقادی داری با ما در میون بذار! هدف ما بهبود تجربه‌ی نویسندگی و مطالعه‌ی فارسیه 🌟
+            </p>
+
+            <form class="contact-form-modern" id="contactForm">
+                <div class="contact-form-fields vertical">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">نام کامل</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="مثلاً امیرحسین رضایی"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">ایمیل</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="example@gmail.com"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">پیام شما</label>
+                        <textarea id="message" name="message" rows="5" class="form-control"
+                                  placeholder="بنویس چی تو ذهنت هست!" required></textarea>
+                    </div>
+
+                    <div class="contact-form-btn-row">
+                        <button type="submit" class="btn btn-primary">
+                            ارسال پیام
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}

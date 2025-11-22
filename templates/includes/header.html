@@ -6,14 +6,12 @@
     </div>
     <nav class="site-nav" aria-label="منوی ناوبری">
         <a href="/">خانه</a>
-        <a href="#">درباره ما</a>
-        <a href="#">تماس با ما</a>
+        <a href="{% url 'about-us' %}">درباره ما</a>
+        <a href="{% url 'contact-us' %}">تماس با ما</a>
     </nav>
     <div class="action-bar">
-        <!-- مهمان -->
         <button class="btn btn-outline-primary login-btn">ورود</button>
         <button class="btn btn-outline-secondary register-btn">ثبت‌نام</button>
-        <!-- لاگین شد -->
         <button class="btn btn-primary add-post-btn">پست جدید</button>
         <div class="user-menu" tabindex="0">
             <img src="{% static 'img/logo.png' %}" alt="User" class="user-avatar">

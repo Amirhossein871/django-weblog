@@ -644,3 +644,77 @@ body {
         padding: 1rem 0;
     }
 }
+
+
+.about-card {
+    background: #fff;
+    border-radius: 1.3rem;
+    box-shadow: 0 8px 24px -8px rgba(33,154,228,0.14);
+    padding: 2.2rem 2rem;
+    text-align: right;
+}
+
+.about-img {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px -8px rgba(33,154,228,0.15);
+    margin: 0 auto 1.6rem auto;
+}
+
+.about-title {
+    color: #219ae4;
+    font-weight: 900;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.about-subtitle {
+    font-weight: 800;
+    margin-top: 1.8rem;
+    color: #154766;
+}
+
+.about-text {
+    font-size: 1.05rem;
+    color: #21476a;
+    line-height: 1.9;
+}
+
+
+.contact-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px -8px rgba(33, 154, 228, 0.15);
+    padding: 2.5rem 2rem;
+    max-width: 960px;
+    margin: 2rem auto;
+}
+
+.contact-title {
+    color: #219ae4;
+    font-weight: 900;
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contact-desc {
+    text-align: center;
+    color: #21476a;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-form-modern .form-label {
+    font-weight: 700;
+    color: #154766;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    display: none;
+}

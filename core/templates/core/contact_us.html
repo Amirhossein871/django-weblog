@@ -9,24 +9,31 @@
                 هر سوال، پیشنهاد یا انتقادی داری با ما در میون بذار! هدف ما بهبود تجربه‌ی نویسندگی و مطالعه‌ی فارسیه 🌟
             </p>
 
-            <form class="contact-form-modern" id="contactForm">
+            <form class="contact-form-modern needs-validation" id="contactForm" method="post" novalidate>
+                {% csrf_token %}
                 <div class="contact-form-fields vertical">
                     <div class="mb-3">
                         <label for="name" class="form-label">نام کامل</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="مثلاً امیرحسین رضایی"
-                               required>
+                        {{ form.name }}
+                        <div class="invalid-feedback">لطفا نام کامل خود را وارد کنید</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">ایمیل</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="example@gmail.com"
-                               required>
+                        {{ form.email }}
+                        <div class="invalid-feedback">لطفاً ایمیل صحیح وارد کنید</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">عنوان پیام</label>
+                        {{ form.title }}
+                        <div class="invalid-feedback">لطفاً عنوان پیام خود را بنویسید</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="message" class="form-label">پیام شما</label>
-                        <textarea id="message" name="message" rows="5" class="form-control"
-                                  placeholder="بنویس چی تو ذهنت هست!" required></textarea>
+                        {{ form.message }}
+                        <div class="invalid-feedback">لطفاً پیام خود را بنویسید</div>
                     </div>
 
                     <div class="contact-form-btn-row">
@@ -39,3 +46,39 @@
         </section>
     </div>
 {% endblock %}
+
+{% block foot %}
+    {% if messages %}
+        <script src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+        <script>
+            {% for message in messages %}
+                Swal.fire({
+                    icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}
+                        info{% endif %}",
+                    title: "{% if message.tags == 'success' %}موفقیت{% elif message.tags == 'error' %}خطا{% else %}
+                        اطلاعات{% endif %}",
+                    text: "{{ message }}",
+                    confirmButtonText: "باشه"
+                });
+            {% endfor %}
+        </script>
+    {% endif %}
+    {% if form.errors %}
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "خطا در اعتبارسنجی",
+                html: `
+            <ul style="text-align:right; direction:rtl; list-style-type: none;">
+                {% for field, errors in form.errors.items %}
+                    <li><strong>{{ field.label }}</strong> {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        `,
+                confirmButtonText: "باشه",
+                confirmButtonColor: "#d33"
+            });
+        </script>
+    {% endif %}
+{% endblock %}
+

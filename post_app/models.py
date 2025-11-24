@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
 from utils.text import slugify_unidecode
 from django.contrib.auth import get_user_model
@@ -60,10 +61,15 @@ class Post(models.Model):
     status = models.CharField(max_length=20, choices=StatusChoices.choices, verbose_name="Post Status",
                               default=StatusChoices.DRAFT)
     views = models.PositiveIntegerField(default=0)
+    published_at = models.DateTimeField(null=True, blank=True, verbose_name="Post Published")
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify_unidecode(self.title)
+
+        if self.status == self.StatusChoices.PUBLISHED and not self.published_at:
+            self.published_at = timezone.now()
+
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

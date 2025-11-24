@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% load jalali %}
+
+{% block main %}
+    <aside class="filter-panel" aria-label="فیلترها">
+        <div class="filter-title">فیلترها</div>
+        <div class="filter-row">
+            <label class="filter-label">دسته</label>
+            <select class="filter-select" aria-label="دسته">
+                <option value="">همه دسته‌ها</option>
+                {% for category in categories %}
+                    <option>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter-row">
+            <label class="filter-label">مرتب‌سازی</label>
+            <select class="filter-select" aria-label="مرتب‌سازی">
+                <option value="new">جدیدترین</option>
+                <option value="old">قدیمی‌ترین</option>
+                <option value="popular">پربازدیدترین</option>
+            </select>
+        </div>
+        <button class="apply-btn" type="button">اعمال فیلتر</button>
+    </aside>
+    <section class="center-col" aria-label="محتوای اصلی">
+        <div class="search-row">
+            <form class="search-card" role="search">
+                <input type="search" placeholder="جستجو در پست‌ها..." aria-label="جستجو">
+                <button type="submit">جستجو</button>
+            </form>
+        </div>
+        <section class="posts" aria-live="polite">
+            {% if page_obj %}
+                {% for post in page_obj %}
+                    <article class="post-card">
+                        <div class="post-thumb" style="background-image:url('{{ post.image.url }}');"></div>
+                        <div class="post-body">
+                            <div class="post-title">{{ post.title }}</div>
+                            <div class="post-meta">{{ post.author.username }}</div>
+                            <div class="post-meta">{{ post.published_at|jalali_words }}</div>
+                            <div class="post-excerpt">
+                                {{ post.excerpt }}
+                            </div>
+                            <div class="post-actions">
+                                <a class="read-btn" href="{{ post.get_absolute_url }}">مطالعه کامل</a>
+                                <span style="color:var(--muted);font-size:0.9rem">{{ post.views }} دیدگاه</span>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    پستی یافت نشد
+                </div>
+            {% endif %}
+
+        </section>
+        {% with total=page_obj.paginator.num_pages current=page_obj.number %}
+            <nav class="pager" aria-label="صفحه‌بندی">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                {% endif %}
+                {% if current > 3 %}
+                    <a href="?page=1">1</a>
+                    {% if current > 4 %}
+                        <span>…</span>
+                    {% endif %}
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    {% if num >= current|add:"-2" and num <= current|add:"2" %}
+                        {% if num == current %}
+                            <a class="active">{{ num }}</a>
+                        {% else %}
+                            <a href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if current < total|add:"-2" %}
+                    {% if current < total|add:"-3" %}
+                        <span>…</span>
+                    {% endif %}
+                    <a href="?page={{ total }}">{{ total }}</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                {% endif %}
+            </nav>
+        {% endwith %}
+    </section>
+{% endblock %}

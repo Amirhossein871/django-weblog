@@ -17,11 +17,16 @@ class CategoryAdmin(MPTTModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'category', 'status', 'views', 'likes_count', 'created_at')
-    list_filter = ('status', 'category', 'author')
+    list_display = (
+        'title', 'author', 'category', 'status',
+        'views', 'likes_count', 'created_at', 'published_at'
+    )
+    list_filter = ('status', 'category', 'author', 'published_at')
     search_fields = ('title', 'excerpt', 'content')
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields = ('created_at', 'updated_at',)
+    readonly_fields = ('created_at', 'updated_at', 'published_at')
+    date_hierarchy = 'created_at'
+
     fieldsets = (
         ('General Info', {
             'fields': ('title', 'slug', 'author', 'status', 'category', 'image')
@@ -33,20 +38,20 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('views',)
         }),
         ('Timestamps', {
-            'fields': ('created_at', 'updated_at')
+            'fields': ('created_at', 'updated_at', 'published_at')
         }),
     )
 
     def likes_count(self, obj):
         return obj.likes.count()
 
-    likes_count.short_description = 'Likes Count'
+    likes_count.short_description = 'Likes'
 
 
 @admin.register(PostLike)
 class PostLikeAdmin(admin.ModelAdmin):
     list_display = ('post', 'user', 'created_at')
-    list_filter = ('created_at',)
+    list_filter = ('created_at', 'post')
     search_fields = ('post__title', 'user__email')
     readonly_fields = ('created_at',)
     ordering = ('-created_at',)
@@ -55,7 +60,7 @@ class PostLikeAdmin(admin.ModelAdmin):
 @admin.register(SavedPost)
 class SavedPostAdmin(admin.ModelAdmin):
     list_display = ('post', 'user', 'saved_at')
-    list_filter = ('saved_at',)
+    list_filter = ('saved_at', 'post')
     search_fields = ('post__title', 'user__email')
     readonly_fields = ('saved_at',)
     ordering = ('-saved_at',)

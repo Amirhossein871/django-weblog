@@ -68,9 +68,9 @@ class SavedPostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'post', 'short_comment', 'created_at')
+    list_display = ('user', 'post', 'guest_name', 'guest_email', 'short_comment', 'created_at')
     list_filter = ('post', 'created_at')
-    search_fields = ('user__email', 'comment', 'post__title')
+    search_fields = ('user__email', 'comment', 'post__title', 'guest_name', 'guest_email')
     readonly_fields = ('created_at',)
     ordering = ('-created_at',)
 

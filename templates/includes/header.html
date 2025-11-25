@@ -10,18 +10,23 @@
         <a href="{% url 'contact-us' %}">تماس با ما</a>
     </nav>
     <div class="action-bar">
-        <button class="btn btn-outline-primary login-btn">ورود</button>
-        <button class="btn btn-outline-secondary register-btn">ثبت‌نام</button>
-        <button class="btn btn-primary add-post-btn">پست جدید</button>
-        <div class="user-menu" tabindex="0">
-            <img src="{% static 'img/logo.png' %}" alt="User" class="user-avatar">
-            <span class="user-name">نام کاربر</span>
-            <span>▼</span>
-            <div class="dropdown-menu">
-                <a href="#">داشبورد</a>
-                <hr class="dropdown-divider">
-                <a href="#">خروج</a>
+
+        {% if request.user.is_authenticated %}
+            <button class="btn btn-primary add-post-btn">پست جدید</button>
+            <div class="user-menu" tabindex="0">
+                <img src="{% static 'img/logo.png' %}" alt="User" class="user-avatar">
+                <span class="user-name">{{ request.user.username }}</span>
+                <span>▼</span>
+                <div class="dropdown-menu">
+                    <a href="#">داشبورد</a>
+                    <hr class="dropdown-divider">
+                    <a href="#">خروج</a>
+                </div>
             </div>
-        </div>
+        {% else %}
+            <button class="btn btn-outline-primary login-btn">ورود</button>
+            <button class="btn btn-outline-secondary register-btn">ثبت‌نام</button>
+        {% endif %}
+
     </div>
 </header>

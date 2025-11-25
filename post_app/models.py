@@ -78,6 +78,12 @@ class Post(models.Model):
     def likes_count(self):
         return self.likes.count()
 
+    def is_user_liked(self, user):
+        return self.likes.filter(user=user).exists()
+
+    def get_comments(self):
+        return self.comments.all().order_by("-created_at")
+
 
 class PostLike(models.Model):
     class Meta:
@@ -110,7 +116,9 @@ class Comment(models.Model):
         verbose_name_plural = "Comments"
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Comment", related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Comment")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Comment", null=True, blank=True)
+    guest_name = models.CharField(max_length=255, verbose_name="Guest Name", blank=True, null=True)
+    guest_email = models.EmailField(verbose_name="Guest Email", blank=True, null=True)
     comment = models.TextField(verbose_name="Comment")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Comment Created")
 

@@ -1,1 +1,156 @@
 {% extends 'layout.html' %}
+{% load jalali static %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/post-content.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="center-col">
+        <div class="detail-container">
+            <article class="post-detail-card">
+
+                <img src="{{ post.image.url }}" class="post-main-img" alt="تصویر پست">
+
+                <div class="post-detail-body">
+                    <h1 class="post-title-detail">{{ post.title }}</h1>
+
+                    <div class="post-info-row">
+                        <span><i
+                                class="bi bi-person-circle"></i> توسط <strong>{{ post.author.username }}</strong></span>
+                        <span><i class="bi bi-calendar-event"></i> {{ post.published_at | jalali_words }}</span>
+                        <span><i class="bi bi-eye"></i> {{ post.views }} بازدید</span>
+                    </div>
+
+                    <div class="post-action-cat-row">
+                        <div class="category-list boxed">
+                            {% if post.category %}
+                                {% for cat in post.category.get_ancestors %}
+                                    <div class="cat-box">{{ cat.name }}</div>
+                                {% endfor %}
+                                <div class="cat-box">{{ post.category.name }}</div>
+                            {% else %}
+                                <div class="cat-box">بدون دسته‌بندی</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="post-actions">
+                            <button class="action-btn action-btn-like {% if user_like %}liked{% endif %}"
+                                    data-post-id="{{ post.id }}"
+                                    data-post-slug="{{ post.slug }}">
+                                <i class="bi bi-heart"></i>
+                                <span>{{ post.likes.count }}</span>
+                            </button>
+                            <button class="action-btn action-btn-save {% if user_has_saved %}saved{% endif %}"
+                                    data-post-slug="{{ post.slug }}">
+                                <i class="{% if user_has_saved %}bi-bookmark-fill{% else %}bi-bookmark{% endif %}"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="post-content">
+                        {{ post.content|safe }}
+                    </div>
+                </div>
+            </article>
+
+            <section class="comment-form-modern">
+                <h5><i class="bi bi-chat-left-text"></i> ثبت دیدگاه</h5>
+
+                <form id="commentForm" class="comment-form-fields vertical" novalidate method="post">
+                    {% csrf_token %}
+                    {% if not request.user.is_authenticated %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">نام شما</label>
+                            {{ comment_form.guest_name }}
+                            <div class="invalid-feedback">نام حداقل باید ۳ کاراکتر باشد.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">ایمیل شما</label>
+                            {{ comment_form.guest_email }}
+                            <div class="invalid-feedback">ایمیل معتبر وارد کنید.</div>
+                        </div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">دیدگاه شما</label>
+                        {{ comment_form.comment }}
+                        <div class="invalid-feedback">متن دیدگاه نباید خالی باشد.</div>
+                    </div>
+
+                    <div class="comment-form-btn-row">
+                        <button type="submit" class="btn btn-primary">ارسال دیدگاه</button>
+                    </div>
+                </form>
+            </section>
+            {% if post.get_comments %}
+                {% for message in post.get_comments %}
+                    {% if message.user %}
+                        <div class="comment-card">
+                            <img src="{% static 'img/avatar.png' %}" class="comment-avatar" alt="User Avatar">
+                            <div class="comment-body">
+                                <div class="comment-meta">{{ message.user.username }}</div>
+                                <div class="comment-meta">{{ message.created_at|jalali_words }}</div>
+                                <div class="comment-text">
+                                    {{ message.comment }}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="comment-card">
+                            <img src="{% static 'img/avatar.png' %}" class="comment-avatar" alt="User Avatar">
+                            <div class="comment-body">
+                                <div class="comment-meta"> مهمان : {{ message.guest_name }}</div>
+                                <div class="comment-meta">{{ message.created_at|jalali_words }}</div>
+                                <div class="comment-text">
+                                    {{ message.comment }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    هیچ دیدگاهی برای این پست ثبت نشده است
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block foot %}
+    <script src="{% static 'post_app/script.js' %}"></script>
+    {% if messages %}
+        <script src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+        <script>
+            {% for message in messages %}
+                Swal.fire({
+                    icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}
+                        info{% endif %}",
+                    title: "{% if message.tags == 'success' %}موفقیت{% elif message.tags == 'error' %}خطا{% else %}
+                        اطلاعات{% endif %}",
+                    text: "{{ message }}",
+                    confirmButtonText: "باشه"
+                });
+            {% endfor %}
+        </script>
+    {% endif %}
+    {% if form.errors %}
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "خطا در اعتبارسنجی",
+                html: `
+            <ul style="text-align:right; direction:rtl; list-style-type: none;">
+                {% for field, errors in form.errors.items %}
+                    <li><strong>{{ field.label }}</strong> {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        `,
+                confirmButtonText: "باشه",
+                confirmButtonColor: "#d33"
+            });
+        </script>
+    {% endif %}
+{% endblock %}

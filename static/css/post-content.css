@@ -1,6 +1,3 @@
-/*
-post-content 281;
-*/
 .detail-container {
     display: flex;
     flex-direction: column;
@@ -63,7 +60,6 @@ post-content 281;
     margin-bottom: 2rem;
 }
 
-/* دسته‌بندی با باکس مستطیلی و شیک */
 .category-list.boxed {
     display: flex;
     gap: 0.5rem;
@@ -113,7 +109,6 @@ post-content 281;
     color: #154766;
 }
 
-/* کامنت */
 .comment-card {
     flex-direction: row;
     max-width: 1100px;
@@ -183,7 +178,6 @@ post-content 281;
     color: #154766;
 }
 
-/* فرم ثبت دیدگاه وسط چین و حرفه‌ای هر فیلد ردیف جدا */
 .comment-form-modern {
     max-width: 1100px;
     width: 100%;
@@ -235,7 +229,7 @@ post-content 281;
     padding: 0.6rem 0;
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
 
     .post-detail-card,
     .comment-card,
@@ -244,7 +238,7 @@ post-content 281;
     }
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
     .post-detail-body {
         padding: 1.05rem 0.2rem 0.6rem 0.2rem;
     }
@@ -278,8 +272,6 @@ post-content 281;
     }
 }
 
-/* ----------------------------------------------------------------- post-content  */
-
 .post-content {
     font-size: 1rem;
     line-height: 2.05;
@@ -289,7 +281,6 @@ post-content 281;
     color: #21476a;
 }
 
-/* تیترها */
 .post-content h1,
 .post-content h2,
 .post-content h3,
@@ -324,12 +315,10 @@ post-content 281;
 }
 
 
-/* پاراگراف */
 .post-content p {
     margin-bottom: 1em;
 }
 
-/* لیست‌های بدون شماره و شماره‌دار */
 .post-content ul,
 .post-content ol {
     margin-bottom: 1.2em;
@@ -355,7 +344,6 @@ post-content 281;
     margin-bottom: 0.5em;
 }
 
-/* بلاک‌کوت */
 .post-content blockquote {
     background: #eaf6ff;
     border-right: 5px solid #219ae4;
@@ -372,7 +360,6 @@ post-content 281;
     margin-bottom: 0;
 }
 
-/* عکس داخل محتوا */
 .post-content img {
     display: block;
     max-width: 79%;
@@ -446,7 +433,6 @@ post-content 281;
     margin: 0 0.15em;
 }
 
-/* لینک‌ها */
 .post-content a {
     color: #219ae4;
     text-decoration: underline;
@@ -456,4 +442,18 @@ post-content 281;
 .post-content a:hover {
     color: #154766;
     text-decoration: underline;
+}
+
+.action-btn.liked, .comment-action-btn.liked {
+    color: #e63946;
+    background: #ffe6e6;
+}
+
+.action-btn.liked:hover, .comment-action-btn.liked:hover {
+    background: #ffdede;
+    color: #b30000;
+}
+
+.action-btn-save.saved i {
+    color: #00bfff;
 }

@@ -2,31 +2,39 @@
 {% load jalali %}
 
 {% block main %}
-    <aside class="filter-panel" aria-label="فیلترها">
+
+    <form method="get" class="filter-panel" aria-label="فیلترها">
         <div class="filter-title">فیلترها</div>
         <div class="filter-row">
             <label class="filter-label">دسته</label>
-            <select class="filter-select" aria-label="دسته">
+            <select class="filter-select" name="category">
                 <option value="">همه دسته‌ها</option>
                 {% for category in categories %}
-                    <option>{{ category.name }}</option>
+                    <option value="{{ category.name }}"
+                            {% if request.GET.category == category.name %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
         <div class="filter-row">
             <label class="filter-label">مرتب‌سازی</label>
-            <select class="filter-select" aria-label="مرتب‌سازی">
-                <option value="new">جدیدترین</option>
-                <option value="old">قدیمی‌ترین</option>
-                <option value="popular">پربازدیدترین</option>
+            <select class="filter-select" name="ordering">
+                <option value="">جدیدترین</option>
+                <option value="-published_at" {% if request.GET.ordering == '-published_at' %}selected{% endif %}>
+                    قدیمی‌ترین
+                </option>
+                <option value="-views" {% if request.GET.ordering == '-views' %}selected{% endif %}>پربازدیدترین
+                </option>
             </select>
         </div>
-        <button class="apply-btn" type="button">اعمال فیلتر</button>
-    </aside>
+        <button class="apply-btn" type="submit">اعمال فیلتر</button>
+    </form>
+
     <section class="center-col" aria-label="محتوای اصلی">
         <div class="search-row">
-            <form class="search-card" role="search">
-                <input type="search" placeholder="جستجو در پست‌ها..." aria-label="جستجو">
+            <form class="search-card" method="get" role="search">
+                <input type="search" name="search" value="{{ request.GET.search }}" placeholder="جستجو در پست‌ها...">
                 <button type="submit">جستجو</button>
             </form>
         </div>

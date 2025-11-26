@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% load jalali %}
+{% load jalali static %}
 
 {% block main %}
 
@@ -96,4 +96,19 @@
             </nav>
         {% endwith %}
     </section>
+{% endblock %}
+{% block foot %}
+    <script src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                Swal.fire({
+                    icon: 'success',
+                    title: 'عملیات موفق!',
+                    text: '{{ msg }}',
+                    confirmButtonColor: '#3085d6'
+                })
+            {% endfor %}
+        </script>
+    {% endif %}
 {% endblock %}

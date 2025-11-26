@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'mptt',
     'django_filters',
+    'account_app',
     'core',
-    'post_app'
+    'post_app',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,17 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'account_app.User'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+SESSION_COOKIE_AGE = 1209600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+AUTHENTICATION_BACKENDS = [
+    'account_app.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {

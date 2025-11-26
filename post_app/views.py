@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    post_list = Post.objects.all().order_by('-published_at')
+    post_list = Post.objects.filter(status__iexact=Post.StatusChoices.PUBLISHED).order_by('-published_at')
     post_filter = PostFilter(request.GET, queryset=post_list)
     filtered_posts = post_filter.qs
 
@@ -95,8 +95,6 @@ def toggle_save(request, slug):
     else:
         SavedPost.objects.create(post=post, user=user)
         saved = True
-
-    print('Save triggered ==> ', user, post)
 
     return JsonResponse({
         "saved": saved,

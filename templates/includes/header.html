@@ -18,13 +18,22 @@
                 <span class="user-name">{{ request.user.username }}</span>
                 <span>▼</span>
                 <div class="dropdown-menu">
-                    <a href="#">داشبورد</a>
+                    <a class="item" href="#">داشبورد</a>
                     <hr class="dropdown-divider">
-                    <a href="#">خروج</a>
+                    {% if request.user.is_staff %}
+                        <a class="item" href="/admin/">پنل ادمین</a>
+                        <hr class="dropdown-divider">
+                    {% endif %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="bi bi-box-arrow-right"></i> خروج از حساب
+                        </button>
+                    </form>
                 </div>
             </div>
         {% else %}
-            <button class="btn btn-outline-primary login-btn">ورود</button>
+            <a class="btn btn-outline-primary login-btn" href="{% url 'login' %}">ورود</a>
             <button class="btn btn-outline-secondary register-btn">ثبت‌نام</button>
         {% endif %}
 

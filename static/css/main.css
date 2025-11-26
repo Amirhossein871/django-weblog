@@ -265,7 +265,7 @@ body {
     display: block;
 }
 
-.dropdown-menu a {
+.dropdown-menu .item {
     display: block;
     color: #154766;
     text-decoration: none;
@@ -275,7 +275,7 @@ body {
     transition: background 0.2s;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu .item:hover {
     background: #eaf6ff;
     color: #219ae4;
 }

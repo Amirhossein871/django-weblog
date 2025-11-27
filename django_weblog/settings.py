@@ -151,3 +151,5 @@ CKEDITOR_CONFIGS = {
         'contentsLangDirection': 'rtl',
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه ورود</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'boostrap-icons/font/bootstrap-icons.min.css' %}">
+</head>
+
+<body>
+<div class="forms">
+    <div class="form-card">
+        <div class="form-header">
+            <img src="{% static 'img/logo.png' %}" alt="لوگو" class="form-logo">
+            <h4 class="mb-1">ثبت‌نام</h4>
+            <div class="mb-3 text-muted">لطفاً اطلاعات خود را وارد کنید</div>
+        </div>
+        <form id="register-form" novalidate method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label">ایمیل</label>
+                {{ form.email }}
+                <div class="invalid-feedback">لطفاً ایمیل معتبر وارد کنید.</div>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">نام کاربری</label>
+                {{ form.username }}
+                <div class="invalid-feedback">لطفاً نام کاربری معتبر وارد کنید.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password1" class="form-label">رمز عبور</label>
+                {{ form.password1 }}
+                <div class="invalid-feedback" id="password-feedback">
+                    رمز عبور باید تمام شرایط زیر را داشته باشد.
+                </div>
+                <ul class="password-status list-unstyled mt-2 ps-2 small mb-0">
+                    <li id="length" class="text-danger">حداقل ۸ کاراکتر</li>
+                    <li id="uppercase" class="text-danger">حرف بزرگ (A-Z)</li>
+                    <li id="number" class="text-danger">عدد (0-9)</li>
+                    <li id="special" class="text-danger">کاراکتر ویژه (!,@,#,...)</li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">تکرار رمز عبور</label>
+                {{ form.password2 }}
+                <div class="invalid-feedback" id="password2-feedback">
+                    رمز عبور مطابقت ندارد.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" id="register-btn" disabled>ثبت نام</button>
+        </form>
+    </div>
+</div>
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/password_validator.js' %}"></script>
+<script src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            Swal.fire({
+                icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}
+                    info{% endif %}",
+                title: "{% if message.tags == 'success' %}موفقیت{% elif message.tags == 'error' %}خطا{% else %}
+                    اطلاعات{% endif %}",
+                text: "{{ message }}",
+                confirmButtonText: "باشه"
+            });
+        {% endfor %}
+    {% endif %}
+    {% if form.non_field_errors %}
+        Swal.fire({
+            icon: 'error',
+            title: 'خطا',
+            text: "{{ form.non_field_errors.as_text|escapejs }}",
+            confirmButtonColor: '#3085d6'
+        })
+    {% endif %}
+    {% if form.errors %}
+        Swal.fire({
+            icon: "error",
+            title: "خطا در اعتبارسنجی",
+            html: `
+            <ul style="text-align:right; direction:rtl; list-style-type: none;">
+                {% for field, errors in form.errors.items %}
+                    <li><strong>{{ field.label }}</strong> {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        `,
+            confirmButtonText: "باشه",
+            confirmButtonColor: "#d33"
+        });
+    {% endif %}
+    new PasswordValidator({
+        password: '#password1',
+        password2: '#password2',
+        form: '#register-form',
+        button: '#register-btn',
+        feedback: '#password-feedback',
+        feedback2: '#password2-feedback',
+    });
+</script>
+</html>

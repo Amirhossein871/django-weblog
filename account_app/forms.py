@@ -87,3 +87,29 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError("رمز عبور و تکرار آن همخوانی ندارند")
 
         return password2
+
+
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control input-custom',
+    }), error_messages={
+        'required': 'لطفا ایمیل خود را وارد کنید',
+        'invalid': 'لطفا ایمیل معتبر وارد کنید'
+    })
+
+
+class SetNewPasswordForm(forms.Form):
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "form-control input-custom"}),
+        label="رمز جدید"
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "form-control input-custom"}),
+        label="تکرار رمز"
+    )
+
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get("password1") != cleaned.get("password2"):
+            raise forms.ValidationError("رمزها یکسان نیستند!")
+        return cleaned
